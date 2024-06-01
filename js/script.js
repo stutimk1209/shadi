@@ -53,6 +53,18 @@ var x = setInterval(function() {
     }
 }, 1000);
 
+function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+            alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+        });
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
+
 // being a bit cool :p  
 var styles = [
     'background: linear-gradient(#D33106, #571402)'
