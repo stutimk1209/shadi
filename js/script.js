@@ -53,15 +53,18 @@ var x = setInterval(function() {
     }
 }, 1000);
 
-function toggleFullScreen() {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(err => {
-            alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
-        });
+function triggerIframeFullscreen() {
+    var iframe = document.getElementById('twitchStream');
+    var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+    // Attempt to find the fullscreen button within the iframe's document
+    // This is a placeholder selector; Twitch's actual structure may differ
+    var fullscreenButton = iframeDoc.querySelector('.twitch-player-control-button--fullscreen');
+
+    if (fullscreenButton) {
+        fullscreenButton.click();
     } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        }
+        console.log('Fullscreen button not found.');
     }
 }
 
